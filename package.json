@@ -1,8 +1,9 @@
 {
-  "name": "react-places-autocomplete",
-  "version": "7.2.0",
+  "name": "@jeremydurnell/react-places-autocomplete",
+  "version": "7.2.1",
   "description": "A React component for Google Maps Places Autocomplete",
   "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "scripts": {
     "commit": "git-cz",
     "test": "jest",
@@ -29,7 +30,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/kenny-hibino/react-places-autocomplete.git"
+    "url": "https://github.com/JeremyDurnell/react-places-autocomplete"
   },
   "keywords": [
     "React.js",
@@ -57,7 +58,7 @@
   "bugs": {
     "url": "https://github.com/kenny-hibino/react-places-autocomplete/issues"
   },
-  "homepage": "https://github.com/kenny-hibino/react-places-autocomplete#readme",
+  "homepage": "https://github.com/JeremyDurnell/react-places-autocomplete#readme",
   "devDependencies": {
     "babel-cli": "^6.23.0",
     "babel-eslint": "8.2.2",

@@ -129,17 +129,18 @@ class LocationSearchInput extends React.Component {
 
 PlacesAutocomplete is a [Controlled Component](https://facebook.github.io/react/docs/forms.html#controlled-components) with a [Render Prop](https://reactjs.org/docs/render-props.html). Therefore, you MUST pass at least `value` and `onChange` callback to the input element, and render function via `children`.
 
-| Prop                                                    |   Type   |      Required      | Description                                                                                      |
-| ------------------------------------------------------- | :------: | :----------------: | ------------------------------------------------------------------------------------------------ |
-| [`value`](#value)                                       |  string  | :white_check_mark: | `value` for the input element                                                                    |
-| [`onChange`](#onChange)                                 | function | :white_check_mark: | `onChange` function for the input element                                                        |
-| [`children`](#children)                                 | function | :white_check_mark: | Render function to specify the rendering                                                         |
-| [`onSelect`](#onSelect)                                 | function |                    | Event handler to handle user's select event                                                      |
-| [`onError`](#onError)                                   | function |                    | Error handler function that gets called when Google Maps API responds with an error              |
-| [`searchOptions`](#searchOptions)                       |  object  |                    | Options to Google Maps API (i.e. bounds, radius)                                                 |
-| [`debounce`](#debounce)                                 |  number  |                    | Number of milliseconds to delay before making a call to Google Maps API                          |
-| [`highlightFirstSuggestion`](#highlightFirstSuggestion) | boolean  |                    | If set to `true`, first list item in the dropdown will be automatically highlighted              |
-| [`shouldFetchSuggestions`](#shouldFetchSuggestions)     | boolean  |                    | Component will hit Google Maps API only if this flag is set `true`                               |
+| Prop                                                    |   Type   |      Required      | Description                                                  |
+| ------------------------------------------------------- | :------: | :----------------: | ------------------------------------------------------------ |
+| [`value`](#value)                                       |  string  | :white_check_mark: | `value` for the input element                                |
+| [`onChange`](#onChange)                                 | function | :white_check_mark: | `onChange` function for the input element                    |
+| [`children`](#children)                                 | function | :white_check_mark: | Render function to specify the rendering                     |
+| [`onSelect`](#onSelect)                                 | function |                    | Event handler to handle user's select event                  |
+| [`onError`](#onError)                                   | function |                    | Error handler function that gets called when Google Maps API responds with an error |
+| [`fetcPredictions`](#fetchPredictions)                  | function |                    | Overrides default behavior for fetching predictions. Can be used to override Google Maps API. |
+| [`searchOptions`](#searchOptions)                       |  object  |                    | Options to Google Maps API (i.e. bounds, radius)             |
+| [`debounce`](#debounce)                                 |  number  |                    | Number of milliseconds to delay before making a call to Google Maps API |
+| [`highlightFirstSuggestion`](#highlightFirstSuggestion) | boolean  |                    | If set to `true`, first list item in the dropdown will be automatically highlighted |
+| [`shouldFetchSuggestions`](#shouldFetchSuggestions)     | boolean  |                    | Component will hit Google Maps API only if this flag is set `true` |
 | [`googleCallbackName`](#googleCallbackName)             |  string  |                    | You can provide a callback name to initialize `PlacesAutocomplete` after google script is loaded |
 
 <a name="value"></a>
@@ -322,6 +323,34 @@ const onError = (status, clearSuggestions) => {
   value={this.state.value}
   onChange={this.handleChange}
   onError={onError}
+>
+  {/* Custom render function */}
+</PlacesAutocomplete>
+```
+
+<a name="fetchPredictions"></a>
+
+### fetchPredictions
+
+Type: `function`
+Required: `false`
+
+You can pass `fetchPredictions` prop to customize the way that predictions are loaded. This can be used to load predictions from someplace other than the Google Maps API.
+
+Function takes `input` (string), `searchOptions` (object), and `callback` (function) as parameters
+
+`callback` function takes `predictions` (array), and `status` (string) as parameters
+
+```js
+// Fetch predictions from a service other than the Google Maps API.
+const fetchPredictions = (value, searchOptions, callback) => {
+  console.log('Fetching predictions from acme autocomplete service for input: ', value)
+  fetch(`https://acme.api/autocomplete?input${value}`).then(res => callback(res.predictions, res.status))
+}
+
+<PlacesAutocomplete
+  value={this.state.value}
+  fetchPredictions={this.fetchPredictions}  
 >
   {/* Custom render function */}
 </PlacesAutocomplete>
