@@ -592,3 +592,9 @@ Join us on [Gitter](https://gitter.im/react-places-autocomplete/Lobby) if you ar
 ### License
 
 MIT
+
+### Publishing
+
+[Instructions](https://gist.github.com/coolaj86/1318304)
+
+NOTE: `npm install -g pakmanager` required to publish. 
