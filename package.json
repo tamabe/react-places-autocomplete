@@ -1,6 +1,6 @@
 {
   "name": "@jeremydurnell/react-places-autocomplete",
-  "version": "7.2.1",
+  "version": "7.2.2",
   "description": "A React component for Google Maps Places Autocomplete",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
